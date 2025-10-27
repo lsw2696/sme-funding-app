@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>관리자 대시보드 | 중소기업자금119</title>
+  <style>
+    body { font-family: 'Noto Sans KR', sans-serif; padding: 30px; background-color: #f8f9fa; }
+    h1 { color: #2c3e50; text-align: center; margin-bottom: 20px; }
+    table { border-collapse: collapse; width: 100%; background-color: white; box-shadow: 0 0 6px rgba(0,0,0,0.1); }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: center; font-size: 14px; vertical-align: middle; }
+    th { background-color: #34495e; color: white; }
+    tr:nth-child(even) { background-color: #f2f2f2; }
+    tr:hover { background-color: #eaf2f8; }
+    .top-menu { text-align: right; margin-bottom: 10px; }
+    .btn {
+      padding: 8px 14px; background-color: #3498db; color: white;
+      border: none; border-radius: 4px; cursor: pointer;
+      text-decoration: none;
+    }
+    .btn:hover { background-color: #2e86c1; }
+    .logout-btn { background-color: #e74c3c; }
+    .logout-btn:hover { background-color: #c0392b; }
+    .category { font-weight: bold; color: #27ae60; }
+    .status-btn {
+      cursor: pointer; padding: 5px 10px; border-radius: 5px;
+      color: white; font-weight: bold;
+    }
+    .미연락 { background-color: #e67e22; }
+    .연락완료 { background-color: #2ecc71; }
+    #login-section { text-align: center; margin-top: 100px; }
+    input[type=password] { padding: 10px; font-size: 16px; width: 200px; margin-right: 5px; }
+  </style>
+</head>
+<body>
+  <h1>📊 중소기업자금119 관리자 대시보드</h1>
+
+  <div id="login-section">
+    <p>관리자 비밀번호를 입력하세요.</p>
+    <input type="password" id="password" placeholder="비밀번호 입력">
+    <button class="btn" onclick="login()">로그인</button>
+  </div>
+
+  <div id="dashboard" style="display:none;">
+    <div class="top-menu">
+      <button class="btn" onclick="exportExcel()">📂 엑셀 내보내기</button>
+      <button class="btn logout-btn" onclick="logout()">로그아웃</button>
+    </div>
+
+    <table id="leadsTable">
+      <thead>
+        <tr>
+          <th>ID</th><th>신청구분</th><th>등록일시</th>
+          <th>상호 / 회사명</th><th>대표자</th><th>업종</th>
+          <th>연매출</th><th>직원수</th><th>주요이슈</th>
+          <th>연락처</th><th>연락방법</th><th>연락시간</th>
+          <th>상태</th><th>메모</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script>
+  // 🔹 Render 백엔드 주소로 변경하세요!
+  const BACKEND_URL = "https://sme-funding-backend.onrender.com";
+
+  async function login() {
+    const pw = document.getElementById("password").value;
+    const res = await fetch(BACKEND_URL + "/api/admin/login", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({ password: pw })
+    });
+    const data = await res.json();
+    if (data.ok) {
+      document.getElementById("login-section").style.display = "none";
+      document.getElementById("dashboard").style.display = "block";
+      loadLeads();
+    } else {
+      alert("비밀번호가 올바르지 않습니다.");
+    }
+  }
+
+  async function loadLeads() {
+    const res = await fetch(BACKEND_URL + "/api/admin/leads");
+    const data = await res.json();
+    const tbody = document.querySelector("#leadsTable tbody");
+    tbody.innerHTML = "";
+
+    data.leads.forEach(row => {
+      const tr = document.createElement("tr");
+      tr.dataset.id = row.id;
+
+      tr.innerHTML = `
+        <td>${row.id}</td>
+        <td class="category">${row.category}</td>
+        <td>${row.created_at}</td>
+        <td>${row.company_name}</td>
+        <td>${row.owner_name}</td>
+        <td>${row.business_type}</td>
+        <td>${row.sales_range}</td>
+        <td>${row.employee_count}</td>
+        <td>${row.urgent_issue}</td>
+        <td>${row.phone}</td>
+        <td>${row.contact_method}</td>
+        <td>${row.contact_time}</td>
+        <td><span class="status-btn ${row.status}">${row.status}</span></td>
+        <td>${row.memo || ""}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    document.querySelectorAll(".status-btn").forEach(btn => {
+      btn.addEventListener("click", async () => {
+        const tr = btn.closest("tr");
+        const id = tr.dataset.id;
+        const current = btn.innerText.trim();
+        const newStatus = current === "미연락" ? "연락완료" : "미연락";
+        btn.innerText = newStatus;
+        btn.className = "status-btn " + newStatus;
+        const res = await fetch(BACKEND_URL + "/api/admin/update_status", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({ id, status: newStatus })
+        });
+        const data = await res.json();
+        if (!data.ok) alert("❌ 저장 실패: " + (data.error || "서버 오류"));
+      });
+    });
+  }
+
+  function logout() {
+    document.getElementById("dashboard").style.display = "none";
+    document.getElementById("login-section").style.display = "block";
+  }
+
+  function exportExcel() {
+    window.open(BACKEND_URL + "/api/admin/export_excel", "_blank");
+  }
+  </script>
+</body>
+</html>
