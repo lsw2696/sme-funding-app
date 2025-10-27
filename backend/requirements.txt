@@ -2,4 +2,4 @@ flask
 flask-cors
 gunicorn
 requests
-sqlite3-binary
+
