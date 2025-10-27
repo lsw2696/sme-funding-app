@@ -5,7 +5,7 @@ from flask import Flask, request, jsonify, render_template, send_file
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)  # Netlify에서 오는 요청 허용 (CORS)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 # ---- DB 경로 ----
 DB_PATH = os.path.join(os.path.dirname(__file__), "database.db")
