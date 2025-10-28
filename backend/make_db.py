@@ -5,7 +5,7 @@ c = conn.cursor()
 
 # 메인 진단 신청 테이블 생성
 c.execute("""
-CREATE TABLE IF NOT EXISTS leads_main (
+CREATE TABLE IF NOT EXISTS leads (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     created_at TEXT,
     company_name TEXT,
