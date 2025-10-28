@@ -1,10 +1,21 @@
 import sqlite3
+import os
 
-conn = sqlite3.connect("database.db")
-c = conn.cursor()
+# -------------------
+# DB 경로 지정
+# -------------------
+DB_PATH = os.path.join(os.path.dirname(__file__), "database.db")
 
-# 메인 진단 신청 테이블 생성
-c.execute("""
+# -------------------
+# DB 연결
+# -------------------
+conn = sqlite3.connect(DB_PATH)
+cur = conn.cursor()
+
+# -------------------
+# 테이블 생성 (없으면 자동 생성)
+# -------------------
+cur.execute("""
 CREATE TABLE IF NOT EXISTS leads (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     created_at TEXT,
@@ -26,4 +37,5 @@ CREATE TABLE IF NOT EXISTS leads (
 
 conn.commit()
 conn.close()
-print("✅ database.db created successfully!")
+
+print("✅ database.db created and leads table initialized!")
