@@ -1,66 +1,100 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="UTF-8">
   <title>회사 소개 | 중소기업자금119</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="static/style.css">
+  <style>
+    .about-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      font-family: 'Pretendard', sans-serif;
+    }
+    .about-left, .about-right {
+      flex: 1;
+      min-width: 300px;
+    }
+    .about-left img {
+      width: 180px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+    }
+    .highlight-box {
+      background: #f4f8ff;
+      border-left: 6px solid #0b2149;
+      padding: 20px;
+      margin: 24px 0;
+      border-radius: 10px;
+    }
+    .cta-btn {
+      background: #007aff;
+      color: #fff;
+      padding: 14px 24px;
+      font-size: 16px;
+      border-radius: 8px;
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+    }
+  </style>
 </head>
-<!-- ✅ 상단 네비게이션 바 -->
-<nav style="
-  background:#0b2149;
-  color:#fff;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:12px 40px;
-  font-family:'Pretendard',sans-serif;
-  font-weight:600;
-">
-  <!-- 왼쪽 로고 -->
-  <div style="display:flex; align-items:center; gap:8px;">
-    <span style="font-size:24px;">💰</span>
-    <div style="display:flex; flex-direction:column; line-height:1;">
-      <span style="font-size:18px;">중소기업자금</span>
-      <span style="font-size:22px; font-weight:700;">119</span>
-    </div>
-  </div>
 
-  <!-- 오른쪽 메뉴 -->
-  <div style="display:flex; gap:24px;">
-    <a href="index.html" style="color:#fff; text-decoration:none;">지원금 진단</a>
-    <a href="cash.html" style="color:#fff; text-decoration:none;">운전자금</a>
-    <a href="report.html" style="color:#fff; text-decoration:none;">세무·재무진단</a>
-    <a href="success.html" style="color:#fff; text-decoration:none;">성공사례</a>
-    <a href="about.html" style="color:#fff; text-decoration:none;">회사소개</a>
-    <a href="admin.html" style="color:#fff; text-decoration:none;">관리자</a>
-  </div>
-</nav>
 <body>
+  <!-- ✅ 상단 네비게이션 바 -->
+  <nav style="
+    background:#0b2149;
+    color:#fff;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:12px 40px;
+    font-family:'Pretendard',sans-serif;
+    font-weight:600;">
+    <div style="display:flex; align-items:center; gap:8px;">
+      <span style="font-size:24px;">💰</span>
+      <div style="display:flex; flex-direction:column; line-height:1;">
+        <span style="font-size:18px;">중소기업자금</span>
+        <span style="font-size:22px; font-weight:700;">119</span>
+      </div>
+    </div>
+    <div style="display:flex; gap:24px;">
+      <a href="index.html" style="color:#fff; text-decoration:none;">지원금 진단</a>
+      <a href="cash.html" style="color:#fff; text-decoration:none;">운전자금</a>
+      <a href="report.html" style="color:#fff; text-decoration:none;">세무·재무진단</a>
+      <a href="success.html" style="color:#fff; text-decoration:none;">성공사례</a>
+      <a href="about.html" style="color:#fff; text-decoration:none;">회사소개</a>
+      <a href="admin.html" style="color:#fff; text-decoration:none;">관리자</a>
+    </div>
+  </nav>
+
+  <!-- ✅ 본문 -->
   <main class="main-container">
     <section class="form-card shadow" style="max-width:900px;">
       <h2>👨‍💼 전문가 소개</h2>
 
       <div class="about-container">
         <div class="about-left">
+          <img src="static/img/우석사진.jpg" alt="임우석 프로필">
           <h3>임우석</h3>
           <p>경영지도사 / 정보통신기획평가원 평가위원 / 중소기업 자금 컨설턴트<br>회계·세무 20년 / 공인중개사</p>
 
           <ul>
             <li>정부지원금, 정책자금, 보조금, 세제혜택을 한 번에 매칭</li>
             <li>장부·세무·자금흐름을 실제 심사관 시각으로 점검</li>
-            <li>대표 개인자금과 회사자금의 동시 안정화 (현금흐름 개선)</li>
+            <li>대표 개인자금과 회사자금의 동시 안정화</li>
           </ul>
 
           <blockquote>
-            “제 목표는 서류만 던져주는 게 아닙니다.<br>
-            사장님이 실제로 쓸 수 있는 돈이 회사 안에 남게 만드는 겁니다.”
+            “서류만 던져주는 게 아닙니다.<br>
+            사장님이 실제로 쓸 수 있는 돈이 회사 안에 남게 만드는 것이 목표입니다.”
           </blockquote>
 
           <div class="info-box">
             <h4>📍 상담 / 방문 안내</h4>
             <p>
-              서울시 서초구 서초동 1625-12 명성빌딩 2층 <br>
+              서울시 서초구 서초동 1625-12 명성빌딩 2층<br>
               상담문의: 02-525-8870<br>
               상담 가능 시간: 평일 10:00~18:00
             </p>
@@ -75,21 +109,30 @@
             세무 / 재무 / 지원금 / 담보 / 현금흐름까지 함께 봅니다.<br>
             말뿐이 아니라 실행까지 같이 갑니다.
           </p>
+
+          <div class="highlight-box">
+            <h3>✅ 이런 대표님께 특히 도움이 됩니다!</h3>
+            <ul>
+              <li>창업 초기, 자금 조달이 막막한 분</li>
+              <li>세무사에게 맡기긴 했지만 불안하신 분</li>
+              <li>정부지원금 받고 싶은데 어디서부터 시작할지 모르시는 분</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
   </main>
+
+  <!-- ✅ 하단 푸터 -->
+  <footer style="
+    background:#0b2149;
+    color:#fff;
+    text-align:center;
+    padding:20px 10px;
+    margin-top:40px;
+    font-family:'Pretendard',sans-serif;
+    font-size:14px;">
+    © 2025 중소기업자금119 | 리베르컨설팅 | 경영지도사 임우석
+  </footer>
 </body>
-<!-- ✅ 하단 푸터 -->
-<footer style="
-  background:#0b2149;
-  color:#fff;
-  text-align:center;
-  padding:20px 10px;
-  margin-top:40px;
-  font-family:'Pretendard',sans-serif;
-  font-size:14px;
-">
-  © 2025 중소기업자금119 | 리베르컨설팅 | 경영지도사 임우석
-</footer>
 </html>
