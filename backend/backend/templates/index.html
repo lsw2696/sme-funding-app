@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}지원금 진단 | 중소기업자금119{% endblock %}
+{% block content %}
+
+<main class="main-container">
+  <section class="form-card shadow">
+    <h2>💰 우리 회사가 받을 수 있는 정부지원자금은?</h2>
+    <p class="form-desc">
+      3분 입력하면, 현재 조건에서 가능한 지원금/보조금/정책자금 후보를 안내드립니다.<br>
+      불필요한 영업전화 없이 전문가 1:1만 연락합니다.
+    </p>
+
+    <!-- 서버에서 직접 볼 때는 action 없이, 안내만 -->
+    <form class="input-form">
+      <div class="form-grid">
+        <div><label>회사명</label><input type="text" name="company_name"></div>
+        <div><label>대표자명</label><input type="text" name="owner_name"></div>
+
+        <div><label>업종 / 사업내용</label><input type="text" name="business_type" placeholder="예: 금속가공, PCB조립 등"></div>
+        <div><label>설립연도(개업일)</label><input type="text" name="start_year" placeholder="예: 2019-04-02"></div>
+
+        <div><label>최근 연매출</label>
+          <select name="sales_range">
+            <option>3억 미만</option>
+            <option>3~10억</option>
+            <option>10~30억</option>
+            <option>30억 이상</option>
+            <option>모름/비공개</option>
+          </select>
+        </div>
+
+        <div><label>직원 수(대략)</label><input type="text" name="employee_count" placeholder="예: 7명"></div>
+
+        <div><label>현재 가장 급한 문제</label>
+          <textarea name="urgent_issue" placeholder="예: 운전자금 부족, 세금부담, 설비투자 필요 등"></textarea>
+        </div>
+
+        <div><label>기존 대출 상황</label>
+          <select name="loan_status">
+            <option>정부/정책자금 이용중</option>
+            <option>시중은행 운전자금 있음</option>
+            <option>없음</option>
+            <option>모름/기타</option>
+          </select>
+        </div>
+
+        <div><label>희망 상담 방식</label>
+          <select name="contact_method">
+            <option>전화</option>
+            <option>방문</option>
+            <option>카카오톡/문자</option>
+          </select>
+        </div>
+
+        <div><label>연락 가능한 번호</label><input type="text" name="phone" placeholder="010-0000-0000"></div>
+
+        <div><label>연락 가능 시간대</label>
+          <select name="contact_time">
+            <option>오전</option>
+            <option>오후</option>
+            <option>언제나 가능</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="button" class="submit-btn">무료 지원금 진단 요청하기 (클라우드 버전에서는 Netlify에서 전송)</button>
+    </form>
+  </section>
+</main>
+
+{% endblock %}

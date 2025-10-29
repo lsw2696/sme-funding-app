@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}관리자 대시보드 | 중소기업자금119{% endblock %}
+{% block content %}
+
+<main class="main-container">
+  <section class="form-card shadow" style="max-width:1100px;">
+    <h2>관리자 대시보드</h2>
+
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th><th>접수일시</th><th>회사명</th><th>대표자</th>
+            <th>업종</th><th>설립연도</th><th>매출</th><th>직원수</th>
+            <th>이슈</th><th>대출상황</th><th>연락처</th><th>시간대</th><th>상태</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in leads %}
+          <tr>
+            <td>{{ row["id"] }}</td>
+            <td>{{ row["created_at"] }}</td>
+            <td>{{ row["company_name"] }}</td>
+            <td>{{ row["owner_name"] }}</td>
+            <td>{{ row["business_type"] }}</td>
+            <td>{{ row["start_year"] }}</td>
+            <td>{{ row["sales_range"] }}</td>
+            <td>{{ row["employee_count"] }}</td>
+            <td>{{ row["urgent_issue"] }}</td>
+            <td>{{ row["loan_status"] }}</td>
+            <td>{{ row["phone"] }}</td>
+            <td>{{ row["contact_time"] }}</td>
+            <td>{{ row["status"] }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+  </section>
+</main>
+
+{% endblock %}
