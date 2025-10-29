@@ -1,48 +1,95 @@
-{% extends "base.html" %}
-{% block title %}회사 소개 | 중소기업자금119{% endblock %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>회사 소개 | 중소기업자금119</title>
+  <link rel="stylesheet" href="static/style.css">
+</head>
+<!-- ✅ 상단 네비게이션 바 -->
+<nav style="
+  background:#0b2149;
+  color:#fff;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 40px;
+  font-family:'Pretendard',sans-serif;
+  font-weight:600;
+">
+  <!-- 왼쪽 로고 -->
+  <div style="display:flex; align-items:center; gap:8px;">
+    <span style="font-size:24px;">💰</span>
+    <div style="display:flex; flex-direction:column; line-height:1;">
+      <span style="font-size:18px;">중소기업자금</span>
+      <span style="font-size:22px; font-weight:700;">119</span>
+    </div>
+  </div>
 
-<main class="main-container">
-  <section class="form-card shadow" style="max-width:900px;">
-    <h2>👨‍💼 전문가 소개</h2>
+  <!-- 오른쪽 메뉴 -->
+  <div style="display:flex; gap:24px;">
+    <a href="index.html" style="color:#fff; text-decoration:none;">지원금 진단</a>
+    <a href="cash.html" style="color:#fff; text-decoration:none;">운전자금</a>
+    <a href="report.html" style="color:#fff; text-decoration:none;">세무·재무진단</a>
+    <a href="success.html" style="color:#fff; text-decoration:none;">성공사례</a>
+    <a href="about.html" style="color:#fff; text-decoration:none;">회사소개</a>
+    <a href="admin.html" style="color:#fff; text-decoration:none;">관리자</a>
+  </div>
+</nav>
+<body>
+  <main class="main-container">
+    <section class="form-card shadow" style="max-width:900px;">
+      <h2>👨‍💼 전문가 소개</h2>
 
-    <div class="about-container">
-      <div class="about-left">
-        <h3>임우석</h3>
-        <p>경영지도사 / 정보통신기획평가원 평가위원 / 중소기업 자금 컨설턴트<br>회계·세무 20년 / 공인중개사</p>
+      <div class="about-container">
+        <div class="about-left">
+          <h3>임우석</h3>
+          <p>경영지도사 / 정보통신기획평가원 평가위원 / 중소기업 자금 컨설턴트<br>회계·세무 20년 / 공인중개사</p>
 
-        <ul>
-          <li>정부지원금, 정책자금, 보조금, 세제혜택을 한 번에 매칭</li>
-          <li>장부·세무·자금흐름을 실제 심사관 시각으로 점검</li>
-          <li>대표 개인자금과 회사자금의 동시 안정화 (현금흐름 개선)</li>
-        </ul>
+          <ul>
+            <li>정부지원금, 정책자금, 보조금, 세제혜택을 한 번에 매칭</li>
+            <li>장부·세무·자금흐름을 실제 심사관 시각으로 점검</li>
+            <li>대표 개인자금과 회사자금의 동시 안정화 (현금흐름 개선)</li>
+          </ul>
 
-        <blockquote>
-          “제 목표는 서류만 던져주는 게 아닙니다.<br>
-          사장님이 실제로 쓸 수 있는 돈이 회사 안에 남게 만드는 겁니다.”
-        </blockquote>
+          <blockquote>
+            “제 목표는 서류만 던져주는 게 아닙니다.<br>
+            사장님이 실제로 쓸 수 있는 돈이 회사 안에 남게 만드는 겁니다.”
+          </blockquote>
 
-        <div class="info-box">
-          <h4>📍 상담 / 방문 안내</h4>
+          <div class="info-box">
+            <h4>📍 상담 / 방문 안내</h4>
+            <p>
+              서울시 서초구 서초동 1625-12 명성빌딩 2층 <br>
+              상담문의: 02-525-8870<br>
+              상담 가능 시간: 평일 10:00~18:00
+            </p>
+          </div>
+          <a href="index.html" class="cta-btn">무료 지원금 진단 신청하기</a>
+        </div>
+
+        <div class="about-right">
+          <h4>💡 왜 우리인가?</h4>
           <p>
-            서울시 서초구 서초동 1625-12 명성빌딩 2층 <br>
-            상담문의: 02-525-8870<br>
-            상담 가능 시간: 평일 10:00~18:00
+            은행에서 “어렵다”고 들은 뒤 마지막으로 오는 곳입니다.<br>
+            세무 / 재무 / 지원금 / 담보 / 현금흐름까지 함께 봅니다.<br>
+            말뿐이 아니라 실행까지 같이 갑니다.
           </p>
         </div>
-        <a href="/" class="cta-btn">무료 지원금 진단 신청하기</a>
       </div>
-
-      <div class="about-right">
-        <h4>💡 왜 우리인가?</h4>
-        <p>
-          은행에서 “어렵다”고 들은 뒤 마지막으로 오는 곳입니다.<br>
-          세무 / 재무 / 지원금 / 담보 / 현금흐름까지 함께 봅니다.<br>
-          말뿐이 아니라 실행까지 같이 갑니다.
-        </p>
-      </div>
-    </div>
-  </section>
-</main>
-
-{% endblock %}
+    </section>
+  </main>
+</body>
+<!-- ✅ 하단 푸터 -->
+<footer style="
+  background:#0b2149;
+  color:#fff;
+  text-align:center;
+  padding:20px 10px;
+  margin-top:40px;
+  font-family:'Pretendard',sans-serif;
+  font-size:14px;
+">
+  © 2025 중소기업자금119 | 리베르컨설팅 | 경영지도사 임우석
+</footer>
+</html>
