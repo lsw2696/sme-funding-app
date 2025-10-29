@@ -1,3 +1,38 @@
+import sqlite3
+import os
+
+DB_PATH = "funding.db"
+
+def get_db():
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
+    return conn
+
+def init_db():
+    conn = get_db()
+    c = conn.cursor()
+    c.execute("""
+        CREATE TABLE IF NOT EXISTS leads (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            created_at TEXT,
+            company_name TEXT,
+            owner_name TEXT,
+            business_type TEXT,
+            start_year TEXT,
+            sales_range TEXT,
+            employee_count TEXT,
+            urgent_issue TEXT,
+            loan_status TEXT,
+            contact_method TEXT,
+            phone TEXT,
+            contact_time TEXT,
+            status TEXT DEFAULT '미연락',
+            memo TEXT
+        )
+    """)
+    conn.commit()
+    conn.close()
+
 import os
 import sqlite3
 from datetime import datetime
@@ -204,6 +239,11 @@ def api_admin_update_status():
 # Render 실행 진입점
 # ---------------------------------
 if __name__ == "__main__":
-    init_db()  # ✅ 서버 시작 시 테이블 자동 생성
+    # 👉 서버 시작 전에 DB 삭제
+    if os.path.exists(DB_PATH):
+        os.remove(DB_PATH)  # ❗ 기존 DB 삭제
+
+    init_db()  # ❗ 삭제 후 새로 생성
+
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
