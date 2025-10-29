@@ -95,6 +95,33 @@ def insert_lead(category, data):
     conn.commit()
     conn.close()
 
+# ✅ 바로 아래에 이걸 추가하세요!
+def init_db():
+    conn = get_db()
+    c = conn.cursor()
+    c.execute("""
+        CREATE TABLE IF NOT EXISTS leads (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            category TEXT,
+            company_name TEXT,
+            owner_name TEXT,
+            business_type TEXT,
+            start_year TEXT,
+            sales_range TEXT,
+            employee_count TEXT,
+            urgent_issue TEXT,
+            loan_status TEXT,
+            contact_method TEXT,
+            phone TEXT,
+            contact_time TEXT,
+            memo TEXT,
+            created_at TEXT,
+            status TEXT
+        )
+    """)
+    conn.commit()
+    conn.close()
+
 
 # ---------------------------------
 # API: 지원금 진단 폼 제출 (/ -> index.html)
@@ -177,7 +204,6 @@ def api_admin_update_status():
 # Render 실행 진입점
 # ---------------------------------
 if __name__ == "__main__":
-    # Render는 PORT라는 환경변수를 준다. 없으면 로컬에서 5000으로.
+    init_db()  # ✅ 서버 시작 시 테이블 자동 생성
     port = int(os.environ.get("PORT", 5000))
-    # host=0.0.0.0 으로 해야 외부 접속 가능
     app.run(host="0.0.0.0", port=port)

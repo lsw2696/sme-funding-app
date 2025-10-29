@@ -10,11 +10,10 @@
       불필요한 영업전화 없이 전문가 1:1만 연락합니다.
     </p>
 
-    <!-- 서버에서 직접 볼 때는 action 없이, 안내만 -->
-    <form class="input-form">
+    <form id="supportForm" class="input-form">
       <div class="form-grid">
-        <div><label>회사명</label><input type="text" name="company_name"></div>
-        <div><label>대표자명</label><input type="text" name="owner_name"></div>
+        <div><label>회사명</label><input type="text" name="company_name" required></div>
+        <div><label>대표자명</label><input type="text" name="owner_name" required></div>
 
         <div><label>업종 / 사업내용</label><input type="text" name="business_type" placeholder="예: 금속가공, PCB조립 등"></div>
         <div><label>설립연도(개업일)</label><input type="text" name="start_year" placeholder="예: 2019-04-02"></div>
@@ -52,7 +51,7 @@
           </select>
         </div>
 
-        <div><label>연락 가능한 번호</label><input type="text" name="phone" placeholder="010-0000-0000"></div>
+        <div><label>연락 가능한 번호</label><input type="text" name="phone" placeholder="010-0000-0000" required></div>
 
         <div><label>연락 가능 시간대</label>
           <select name="contact_time">
@@ -63,9 +62,40 @@
         </div>
       </div>
 
-      <button type="button" class="submit-btn">무료 지원금 진단 요청하기 (클라우드 버전에서는 Netlify에서 전송)</button>
+      <button type="submit" class="submit-btn">무료 지원금 진단 요청하기</button>
     </form>
   </section>
 </main>
+
+<!-- ✅ JavaScript 추가 -->
+<script>
+  const BACKEND_URL = "https://sme-funding-backend.onrender.com";  // 백엔드 Flask 주소
+  const form = document.getElementById("supportForm");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault(); // 페이지 새로고침 방지
+    const fd = new FormData(form);
+    const data = {};
+    fd.forEach((v, k) => data[k] = v);
+
+    try {
+      const res = await fetch(`${BACKEND_URL}/api/submit/support`, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(data)
+      });
+
+      const result = await res.json();
+      if (result.ok) {
+        alert("✅ 지원금 진단 신청이 정상 접수되었습니다!");
+        form.reset();
+      } else {
+        alert("❌ 오류가 발생했습니다. 다시 시도해주세요.");
+      }
+    } catch (err) {
+      alert("🚫 서버와 연결할 수 없습니다. (백엔드 점검 필요)");
+    }
+  });
+</script>
 
 {% endblock %}
