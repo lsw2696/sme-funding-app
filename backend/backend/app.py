@@ -1,3 +1,38 @@
+import sqlite3
+import os
+
+DB_PATH = "funding.db"
+
+def get_db():
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
+    return conn
+
+def init_db():
+    conn = get_db()
+    c = conn.cursor()
+    c.execute("""
+        CREATE TABLE IF NOT EXISTS leads (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            created_at TEXT,
+            company_name TEXT,
+            owner_name TEXT,
+            business_type TEXT,
+            start_year TEXT,
+            sales_range TEXT,
+            employee_count TEXT,
+            urgent_issue TEXT,
+            loan_status TEXT,
+            contact_method TEXT,
+            phone TEXT,
+            contact_time TEXT,
+            status TEXT DEFAULT '미연락',
+            memo TEXT
+        )
+    """)
+    conn.commit()
+    conn.close()
+
 import os
 import sqlite3
 from datetime import datetime

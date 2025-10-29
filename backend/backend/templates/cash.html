@@ -10,10 +10,10 @@
       입력하신 내용은 외부에 공개되지 않으며 1:1 맞춤 상담에만 활용됩니다.
     </p>
 
-    <form class="input-form">
+    <form id="cashForm" class="input-form">
       <div class="form-grid">
-        <div><label>회사명 / 상호</label><input type="text" name="company_name"></div>
-        <div><label>대표자 성함</label><input type="text" name="owner_name"></div>
+        <div><label>회사명 / 상호</label><input type="text" name="company_name" required></div>
+        <div><label>대표자 성함</label><input type="text" name="owner_name" required></div>
 
         <div><label>업종 / 주요 사업내용</label><input type="text" name="business_type" placeholder="예: 금속가공, PCB조립 등"></div>
         <div><label>창업년도</label><input type="text" name="start_year" placeholder="예: 2018"></div>
@@ -46,12 +46,43 @@
 
         <div><label>연락 가능한 시간</label><input type="text" name="contact_time" placeholder="예: 평일 오후 2~5시"></div>
 
-        <div><label>연락처</label><input type="text" name="phone" placeholder="010-0000-0000"></div>
+        <div><label>연락처</label><input type="text" name="phone" placeholder="010-0000-0000" required></div>
       </div>
 
-      <button type="button" class="submit-btn">신청 완료하기 (클라우드 버전에서는 Netlify에서 전송)</button>
+      <button type="submit" class="submit-btn">신청 완료하기</button>
     </form>
   </section>
 </main>
+
+<!-- ✅ 자바스크립트 코드 추가 -->
+<script>
+  const BACKEND_URL = "https://sme-funding-backend.onrender.com";
+  const form = document.getElementById("cashForm");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault(); // 폼 전송 시 페이지 새로고침 방지
+    const fd = new FormData(form);
+    const data = {};
+    fd.forEach((v, k) => data[k] = v);
+
+    try {
+      const res = await fetch(`${BACKEND_URL}/api/submit/cash`, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(data)
+      });
+
+      const result = await res.json();
+      if (result.ok) {
+        alert("✅ 운전자금 신청이 정상 접수되었습니다!");
+        form.reset();
+      } else {
+        alert("❌ 오류가 발생했습니다. 다시 시도해주세요.");
+      }
+    } catch (err) {
+      alert("🚫 서버와 연결할 수 없습니다. (백엔드 점검 필요)");
+    }
+  });
+</script>
 
 {% endblock %}
